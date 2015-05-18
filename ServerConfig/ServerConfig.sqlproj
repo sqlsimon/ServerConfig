@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>ServerConfig</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{8161e28b-ebba-46f3-a053-72fe71d917e2}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql110DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>ServerLevel</RootNamespace>
+    <AssemblyName>ServerLevel</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="AgentJobs" />
+    <Folder Include="AgentJobs\Application1" />
+    <Folder Include="AgentJobs\Application2" />
+    <Folder Include="__PublishProfiles" />
+    <Folder Include="SSIS" />
+    <Folder Include="SSIS\Tables" />
+    <Folder Include="Security" />
+    <Folder Include="Environments" />
+    <Folder Include="Environments\DEV" />
+    <Folder Include="Environments\INT" />
+    <Folder Include="Environments\TEST" />
+    <Folder Include="Environments\UAT" />
+    <Folder Include="Environments\PROD" />
+    <Folder Include="Helpers" />
+    <Folder Include="Config" />
+    <Folder Include="Config\Tables" />
+    <Folder Include="Config\Views" />
+    <Folder Include="Config\Functions" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AgentJobs\Application1\Application1.Job1.sql" />
+    <None Include="Application1_ServerConfig.sql" />
+    <None Include="Application2_ServerConfig.sql" />
+    <None Include="__PublishProfiles\ServerConfig.publish.xml" />
+    <None Include="Environments\DEV\SSISVariables.sql" />
+    <None Include="Helpers\SSIS.CreateEnvironmentVariables.sql" />
+    <None Include="Environments\DEV\Setup.sql" />
+    <None Include="Helpers\LoadConfiguration.sql" />
+    <None Include="Environments\INT\Setup.sql" />
+    <None Include="Environments\PROD\Setup.sql" />
+    <None Include="Environments\UAT\Setup.sql" />
+    <None Include="Environments\TEST\Setup.sql" />
+    <None Include="AgentJobs\Application2\Application2.Job1.sql" />
+    <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AgentJobs\Application1\Application1.Job2.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="ServerConfigMain.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <SqlCmdVariable Include="APPLICATION_LIST">
+      <DefaultValue>Application1,Application2</DefaultValue>
+      <Value>$(SqlCmdVar__4)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="ENVIRONMENT">
+      <DefaultValue>DEV</DefaultValue>
+      <Value>$(SqlCmdVar__3)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="SSISCATALOG_DB">
+      <DefaultValue>SSISDB</DefaultValue>
+      <Value>$(SqlCmdVar__2)</Value>
+    </SqlCmdVariable>
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="SSIS\Tables\EnvironmentVars.sql" />
+    <Build Include="Security\SSIS.sql" />
+    <Build Include="Security\Config.sql" />
+    <Build Include="Config\Tables\Applications.sql" />
+    <Build Include="Config\Tables\Components.sql" />
+    <Build Include="Config\Tables\ApplicationComponents.sql" />
+    <Build Include="Config\Views\ApplicationConfiguration.sql" />
+    <Build Include="Config\Functions\StringToTable.sql" />
+  </ItemGroup>
+</Project>
