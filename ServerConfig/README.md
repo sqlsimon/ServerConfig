@@ -44,6 +44,9 @@ User editable objects are
 
 ###Setting up a new Application
 
-To configure an application follow the steps below:      
+To configure an application follow the steps below:    
+  
+*   Do this
+
  
 
